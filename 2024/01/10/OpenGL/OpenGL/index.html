@@ -22,7 +22,7 @@
 
   
 
-  <title>Hello World | Renaissance</title>
+  <title>OpenGL | Renaissance</title>
 
   
 
@@ -97,18 +97,22 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">Hello World</h1>
+          <h1 class="title-wrap">OpenGL</h1>
           <h2 class="title-sub-wrap">
             <strong>Blair Ren</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2024-01-09T09:47:20.954Z" itemprop="datePublished">2024-01-09</time>
+            <time  class="article-date" datetime="2024-01-09T16:00:00.000Z" itemprop="datePublished">2024-01-10</time>
           </h2>
           
           
           <ul class="wrap-list dark">
   
+    <li><a href="/categories/OpenGL/">📒 OpenGL</a></li>
+  
 </ul>
           <ul class="wrap-list dark">
+  
+    <li><a href="/tags/OpenGL/">🏷️ OpenGL</a></li>
   
 </ul>
         </div>
@@ -132,42 +136,24 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h1><p>超好用的OpenGL Doc： <a target="_blank" rel="noopener" href="https://docs.gl/">https://docs.gl/</a></p>
+<h1 id="Vertex-Buffer-and-Drawing-a-Triangle"><a href="#Vertex-Buffer-and-Drawing-a-Triangle" class="headerlink" title="Vertex Buffer and Drawing a Triangle"></a>Vertex Buffer and Drawing a Triangle</h1><p><strong>VBO</strong> 其实就是一个Buffer，一个memory buffer，是GPU上的内存，在VRAM(Video RAM)中。所以其实就是将一些数据放进GPU’s VRAM。</p>
+<p><strong>DrawCall</strong> 指令(which is basically a draw command)，是CPU完成了一些工作后，从CPU发出DrawCall指令通知GPU。大致是解释一下数据。</p>
+<p><strong>Shader</strong> 就是运行在显卡上的程序(a shader is just a bunch of code that we can write which runs on the GPU)。</p>
+<p><strong>OpenGL</strong> 实际上是一个状态机，它已经准备好了Data和Shader，这是它状态的一部分。控制绘制是通过变更状态进行，即设置要用的Data数据和Shader。OpenGL是上下文相关的，所以在OpenGL中生成的所有东西都会被分配一个唯一的标识符(OpenGL works as a state machine, which means that everything you generate is contextual. Everything you generate in OpenGL assigns a unique identify)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void glVertexAttribPointer( GLuint  index,  </span><br><span class="line">			    GLint   size,  </span><br><span class="line">			    GLenum  type,  </span><br><span class="line">			    GLboolean   normalized,  </span><br><span class="line">			    GLsizei     stride,  </span><br><span class="line">			    const GLvoid *  pointer);</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<ul>
+<li><em><code>index</code></em> 是当前属性的索引值(Specifies the index of the generic vertex attribute to be modified)。比如顶点上分别有位置&#x2F;纹理&#x2F;法线，分别对应index 0&#x2F;1&#x2F;2。</li>
+<li><em><code>normalized</code></em> 标识是否访问数据时需要进行标准化。颜色值在Shader中使用时需要被标准化为0到1的float值，这一步标准化可以在CPU中完成，也可以偷懒让GPU帮忙做。</li>
+<li><em><code>stride</code></em> 是一个顶点所有属性的总字节长度(Specifies the byte offset between consecutive generic vertex attributes)。</li>
+<li><em><code>pointer</code></em> 是一个顶点内当前属性的字节偏移值。</li>
+</ul>
+<p>永远不要忘记的重要一步，否则将得到黑屏：To enable and disable a generic vertex attribute array, call <code>glEnableVertexAttribArray</code> and <code>glDisableVertexAttribArray</code> with <code>index</code>.</p>
 
       </section>
 
       
-      
-        <nav class="article-nav">
-          
-            <div class="article-nav-item layout-padding">
-  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
-    
-    <div class="card-text">
-      
-        <a href="/2024/01/09/Hello-Hexo/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">Hello Hexo</h2>
-        </a>
-      
-      <div class="card-text--row">Newer</div>
-    </div>
-  </article>
-</div>
-          
-          
-        </nav>
       
 
       <section class="page-message-container layout-padding">
@@ -201,19 +187,19 @@
         <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
 </svg>
-        <span>2</span>
+        <span>1</span>
       </div>
       <div class="count-box--item">
         <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
 </svg>
-        0
+        1
       </div>
       <div class="count-box--item">
         <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
 </svg>
-        0
+        1
       </div>
     </div>
   </div>
@@ -245,6 +231,12 @@
   <div class="widget-body">
     <ul class="categorys-list">
       
+        <li class="categorys-list-item">
+          <a href="/categories/OpenGL/">
+            OpenGL (1)
+          </a>
+        </li>
+      
     </ul>
   </div>
 </section>
@@ -258,7 +250,7 @@
   </div>
   <div class="widget-body">
     <div class="tags-cloud">
-      
+      <a href="/tags/OpenGL/" style="font-size: 10px;" class="tags-cloud-0">OpenGL</a>
     </div>
   </div>
 </section>
