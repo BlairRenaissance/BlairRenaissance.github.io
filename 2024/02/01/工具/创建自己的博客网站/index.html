@@ -22,7 +22,7 @@
 
   
 
-  <title>Android架构简述 | Renaissance</title>
+  <title>创建自己的博客网站 | Renaissance</title>
 
   
 
@@ -103,7 +103,7 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">Android架构简述</h1>
+          <h1 class="title-wrap">创建自己的博客网站</h1>
           <h2 class="title-sub-wrap">
             <strong>Blair Ren</strong>
             <span>发布于</span>
@@ -113,12 +113,12 @@
           
           <ul class="wrap-list dark">
   
-    <li><a href="/categories/Android/">📒 Android</a></li>
+    <li><a href="/categories/%E5%B7%A5%E5%85%B7/">📒 工具</a></li>
   
 </ul>
           <ul class="wrap-list dark">
   
-    <li><a href="/tags/Android/">🏷️ Android</a></li>
+    <li><a href="/tags/%E5%B7%A5%E5%85%B7/">🏷️ 工具</a></li>
   
 </ul>
         </div>
@@ -142,98 +142,49 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <p><img src="https://raw.githubusercontent.com/BlairRenaissance/ImageHost/main/20240131220021.png"></p>
-<p>Android系统由上至下，分为五个部分：</p>
+        <blockquote>
+<p>三要素：Hexo工程 &#x2F; PicGo图床 &#x2F; Github Pages域名</p>
+</blockquote>
+<h1 id="Hexo工程"><a href="#Hexo工程" class="headerlink" title="Hexo工程"></a>Hexo工程</h1><h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>参考：<a target="_blank" rel="noopener" href="https://alecthw.github.io/books/markdown-simple-world/hexo-tutor-2.html">Hexo入门指南</a> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo -g</span><br><span class="line">$ hexo init blog</span><br><span class="line">$ cd blog</span><br><span class="line">$ npm install</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>完成上述操作，即可通过本地4000端口预览静态博客页面。如果配置了新的样式或更新了文章，但没有生效在博客页面上，可以以下操作一键三连：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<h2 id="Hexo工程结构"><a href="#Hexo工程结构" class="headerlink" title="Hexo工程结构"></a>Hexo工程结构</h2><p><img src="https://raw.githubusercontent.com/BlairRenaissance/ImageHost/main/20240201164011.png"></p>
 <ol>
-<li><p><strong>应用程序层(System Apps)</strong> ：Android 装配了一个核心应用程序集合，包括 E-mail 客户端、SMS 短消息程序、日历、地图、浏览器、联系人管理程序和其他程序，所有应用程序都是用 Java 编程语言编写的。用户开发的 Android 应用程序和 Android 的核心应用程序是同一层次的，它们都是基于 Android 的系统 API 构建的。（即所有安装到手机的应用程序都属于这一层，比如系统自带的联系人、短信等，或者是你从应用商店下载的所有app，当然也包括你自己开发的应用程序）</p>
+<li>文章：md文章文件放置在source的_posts文件夹下即可。</li>
+<li>样式：Hexo有许多好看的样式工程，将其克隆到themes文件夹下，并在主样式配置文件_config.yml中指定样式工程即可生效。</li>
+<li>发布：运行 <code>hexo g</code> 后会自动生成public目录，该文件夹动态生成，因此已加入.gitignore套餐。</li>
+</ol>
+<h2 id="Hexo样式文件"><a href="#Hexo样式文件" class="headerlink" title="Hexo样式文件"></a>Hexo样式文件</h2><ol>
+<li><p>博客页面个人信息配置：修改主样式配置文件 <code>blog/_config.yml</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Renaissance</span><br><span class="line">subtitle: &#x27;谁的身影 尽逐重楼&#x27;</span><br><span class="line">author: Blair Ren</span><br><span class="line">language: en</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>应用程序框架层(Application Framework&#x2F;Java</strong> <strong>API</strong> <strong>Framework)</strong> ：应用程序的体系结构旨在简化组件的重用，任何应用程序都能发布它的功能且任何其他应用程序都可以使用这些功能（需要服从框架执行的安全限制），这一机制允许用户替换组件。开发者完全可以访问核心应用程序所使用的 API 框架。通过提供开放的开发平台，Android 使开发者能够编制极其丰富和新颖的应用程序。开发者可以自由地利用设备硬件优势访问位置信息、运行后台服务、设置闹钟、向状态栏添加通知等。(这一层主要提供了构建应用程序时可能用到的各种API，Android自带的一些核心应用就是使用这些API完成的，开发者也可以自行使用这些API进行自己App的开发。)这一层是编写Google发布的核心应用时所使用的API框架，开发人员同样可以使用这些框架来开发自己的应用，这样便简化了程序开发的结构设计，但是必须要遵守其框架的开发原则。</p>
+<li><p>博客工程文件结构配置，如根据md文件中Tag和Category信息自动生成的文件夹该叫什么。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Directory</span><br><span class="line">source_dir: source</span><br><span class="line">public_dir: public</span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定博客使用的样式工程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">theme: flexblock</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定博客要推送的域名地址。 ^8d95ef</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:BlairRenaissance/BlairRenaissance.github.io.git</span><br><span class="line">  branch: main </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导航栏显示的名字与文件索引地址，在样式工程下的配置文件中配置（如 <code>blog/themes/flexblock/_config.yml</code>），索引地址以 <code>blog/public</code> 文件为根目录。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Header</span><br><span class="line">menu:</span><br><span class="line">  Home: /</span><br><span class="line">  Archives: /archives/</span><br><span class="line">  Categories: /categories/</span><br><span class="line">  Tags: /tags/</span><br><span class="line">  About: /about</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更多的就自由探索叭～</p>
 </li>
 </ol>
-<p>所有的应用程序都是由一系列的服务和系统组成的，主要包括以下几种：</p>
-<hr>
-<table>
-<thead>
-<tr>
-<th><strong>系统</strong></th>
-<th><strong>英文名称</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>视图</td>
-<td>View</td>
-<td>这里的视图指的是丰富的、可扩展的视图集合，可用于构建一个应用程序，包括列表 (Lists)、网格 (Grids)、文本框 (TextBoxes)、按钮 (Buttons)，甚至是内嵌的 Web 浏览器。</td>
-</tr>
-<tr>
-<td>内容管理器</td>
-<td>Content Provider</td>
-<td>内容管理器使得应用程序可以访问另一个应用程序的数据（如联系人数据库）或者共享自己的数据。</td>
-</tr>
-<tr>
-<td>资源管理器</td>
-<td>Resource Manager</td>
-<td>资源管理器提供访问非代码资源，如本地字符串、图形和分层文件 (layout files)。</td>
-</tr>
-<tr>
-<td>通知管理器</td>
-<td>Notification Manager</td>
-<td>通知管理器使得所有的应用程序都能够在状态栏显示通知信息。</td>
-</tr>
-<tr>
-<td>活动管理器</td>
-<td>Activity Manager</td>
-<td>在大多数情况下，每个 Android 应用程序都运行在自己的 Linux 进程中。当应用程序的某些代码需要运行时，这个进程就被创建并一直运行下去，直到系统认为该进程不再有用为止，然后系统将回收该进程占用的内存以便分配给其他的应用程序。活动管理器管理应用程序生命周期，并且提供通用的导航回退功能。</td>
-</tr>
-</tbody></table>
-<ol start="3">
-<li><strong>系统运行库层(C&#x2F;C++库及Android运行库)</strong> ：Android 本地框架是由 C&#x2F;C++ 实现的，包含 C&#x2F;C++ 库，以供 Android 系统的各个组件使用。这些功能通过 Android 的应用程序框架为开发者提供服务。这一层通过一些C&#x2F;C++库来为Android提供主要的特性支持。如SQLite库提供了数据库的支持，OpenGL|ES库提供了3D绘图的支持，Webkit库提供了浏览器内核的支持等。同样在这一层还要Android运行时库，它主要提供了一些核心库，能够允许开发者使用Java语言来编写Android程序。不仅如此，它还包括了Dalvik虚拟机（android5.0后改为ART运行环境），它使得每一个android程序可以运行在独立的进程中，并且拥有自己的Dalvik虚拟机实例。相较于Java虚拟机，Dalvik是专门为移动设备定制的，它针对手机内存、CPU性能有限等情况做了优化处理。</li>
-</ol>
-<hr>
-<table>
-<thead>
-<tr>
-<th><strong>名称</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>系统C语言库</td>
-<td>标准C语言系统库 (libc) 的 BSD 衍生，调整为基于嵌入式 Linux 设备。</td>
-</tr>
-<tr>
-<td>媒体库</td>
-<td>基于 PacketVideo 的 OpenCORE，这些库支持播放和录制许多流行的音频和视频格式，以及静态图像文件，包括 MPEG4、H.264、MP3、AAC、AMR、JPG、PNG。</td>
-</tr>
-<tr>
-<td>界面管理</td>
-<td>管理访问显示子系统，并且为多个应用程序提供 2D 和 3D 图层的无缝融合。</td>
-</tr>
-<tr>
-<td>LibWebCore</td>
-<td>新式的 Web 浏览器引擎，支持 Android 浏览器和内嵌的 Web 视图。</td>
-</tr>
-<tr>
-<td>SGL</td>
-<td>一个内置的 2D 图形引擎。</td>
-</tr>
-<tr>
-<td>3D 库</td>
-<td>基于 OpenGL ES 1.0 APIs 实现，该库可以使用硬件 3D 加速或包含高度优化的 3D 软件光栅。</td>
-</tr>
-<tr>
-<td>FreeType</td>
-<td>位图和矢量字体显示渲染。</td>
-</tr>
-<tr>
-<td>SQLite</td>
-<td>SQLite 是一个所有应用程序都可以使用的强大且轻量级的关系数据库引擎。</td>
-</tr>
-</tbody></table>
-<ol start="4">
-<li><p><strong>硬件抽象层(</strong> <strong>Hardware</strong> <strong>Abstraction Layer,HAL)</strong> ：硬件抽象层 (HAL) 提供标准界面，向更高级别的 Java API 框架显示设备硬件功能。HAL 包含多个库模块，其中每个模块都为特定类型的硬件组件实现一个界面，例如：Audio音频模块，BlueTooth：蓝牙模块，Camera：相机模块，Sensors:传感器。系统内置对传感器的支持达13种，他们分别是：加速度传感器(accelerometer)、磁力传感器(magnetic field)、方向传感器(orientation)、陀螺仪(gyroscope)、环境光照传感器(light)、压力传感器(pressure)、温度传感器(temperature)和距离传感器(proximity)等。当框架 API 要求访问设备硬件时，Android 系统将为该硬件组件加载库模块。厂商会在这层定义自己的<strong>HAL接口</strong>。</p>
+<h1 id="PicGo图床"><a href="#PicGo图床" class="headerlink" title="PicGo图床"></a>PicGo图床</h1><p><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/zh/guide/">PicGo工程手册</a> 轻松上手，太好用了！</p>
+<p>按照 <a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/zh/guide/config.html#github%E5%9B%BE%E5%BA%8A">Github图床</a> 教学说明操作，即可通过PicGo软件管理Github工程中的文件，把一个Github工程当作图床。</p>
+<h1 id="Github-Pages域名"><a href="#Github-Pages域名" class="headerlink" title="Github Pages域名"></a>Github Pages域名</h1><p><code>github.io</code>是完全基于github创建的，其本质上是在你的github账户下创建一个特殊的repo。可以参照如下步骤创建repo：</p>
+<ol>
+<li><p>首先有个github的账户，登陆账户后，你可以<a target="_blank" rel="noopener" href="https://github.com/new">创建一个新的repo</a>。<strong>请务必注意该repo的名字，必须保持格式<code>&lt;username&gt;.github.io</code>，其中<code>&lt;username&gt;</code>替换成你的Github账户名</strong>，这里假定创建的repo为<code>BlairRenaissance.github.io</code> 。</p>
+<p> <img src="https://raw.githubusercontent.com/BlairRenaissance/ImageHost/main/20240201171859.png" alt="550"></p>
 </li>
-<li><p><strong>Linux内核层(Linux Kernel)</strong> ：众所周知，Android系统是基于Linux内核层提供核心系统服务，例如安全、内存管理、进程间通信、网络堆栈、驱动模型。这一层为android设备的各种硬件提供了底层的强大驱动，除了标准Linux内核外，Android还增加了内核的驱动程序，如显示驱动、音频驱动、照相机驱动、蓝牙驱动、Wi-Fi驱动、电源管理等。</p>
+<li><p>将工程地址配置到Hexo工程中（参照[[#^8d95ef|指定域名]]），就可以愉快地用 <code>xxx.github.io</code> 这一域名查看自己的博客啦。</p>
+</li>
+<li><p>如果觉得这个域名不够酷，可以去腾讯云买个域名进行<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2142661">GitHub Pages个性化域名配置</a>。</p>
 </li>
 </ol>
 
@@ -243,14 +194,28 @@
       
         <nav class="article-nav">
           
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/02/01/Android/Android%20%E6%9E%B6%E6%9E%84%E7%AE%80%E8%BF%B0/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Android架构简述</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
           
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
     <div class="card-text">
       
-        <a href="/2024/02/01/%E5%B7%A5%E5%85%B7/%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">创建自己的博客网站</h2>
+        <a href="/2024/01/10/Android/Android%20%E5%9B%BE%E5%BD%A2%E6%98%BE%E7%A4%BA%E7%AE%80%E8%BF%B0/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Android图形显示简述</h2>
         </a>
       
       <div class="card-text--row">Older</div>
