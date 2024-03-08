@@ -22,7 +22,7 @@
 
   
 
-  <title>创建自己的博客网站 | Renaissance</title>
+  <title>渲染调试神器-RenderDoc | Renaissance</title>
 
   
 
@@ -103,11 +103,11 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">创建自己的博客网站</h1>
+          <h1 class="title-wrap">渲染调试神器-RenderDoc</h1>
           <h2 class="title-sub-wrap">
             <strong>Blair Ren</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2024-01-31T16:00:00.000Z" itemprop="datePublished">2024-02-01</time>
+            <time  class="article-date" datetime="2024-03-07T16:00:00.000Z" itemprop="datePublished">2024-03-08</time>
           </h2>
           
           
@@ -119,6 +119,8 @@
           <ul class="wrap-list dark">
   
     <li><a href="/tags/%E5%B7%A5%E5%85%B7/">🏷️ 工具</a></li>
+  
+    <li><a href="/tags/%E6%B8%B2%E6%9F%93/">🏷️ 渲染</a></li>
   
 </ul>
         </div>
@@ -143,56 +145,51 @@
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
         <blockquote>
-<p>三要素：Hexo工程 &#x2F; PicGo图床 &#x2F; Github Pages域名</p>
+<p>三要素：RenderDoc在mac上的编译，运行与使用</p>
 </blockquote>
-<h1 id="Hexo工程"><a href="#Hexo工程" class="headerlink" title="Hexo工程"></a>Hexo工程</h1><h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>参考：<a target="_blank" rel="noopener" href="https://alecthw.github.io/books/markdown-simple-world/hexo-tutor-2.html">Hexo入门指南</a> </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo -g</span><br><span class="line">$ hexo init blog</span><br><span class="line">$ cd blog</span><br><span class="line">$ npm install</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>转自：<a target="_blank" rel="noopener" href="https://www.kindem.xyz/post/36/">MacOS 编译 RenderDoc</a></p>
+<p>RenderDoc 是一款强大的图形调试软件，可以说没有它图形调试基本寸步难行，然而作者说对 MacOS 不太熟悉，所以基本对 MacOS 弃疗了，我们只能自己尝试能不能编译使用起来。</p>
+<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>需要安装的依赖如下：</p>
+<ul>
+<li>autoconf</li>
+<li>automake</li>
+<li>Qt5</li>
+</ul>
+<p>其中 Qt5 是 RenderDoc 的界面库，autoconf 和 automake 在构建 c 胶水层生成工具 swig 会使用到。</p>
+<p>我们可以直接使用 brew 依次安装所有依赖：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install autoconf</span><br><span class="line">brew install automake</span><br><span class="line">brew install qt5</span><br></pre></td></tr></table></figure>
 
-<p>完成上述操作，即可通过本地4000端口预览静态博客页面。如果配置了新的样式或更新了文章，但没有生效在博客页面上，可以以下操作一键三连：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-<h2 id="Hexo工程结构"><a href="#Hexo工程结构" class="headerlink" title="Hexo工程结构"></a>Hexo工程结构</h2><p><img src="https://raw.githubusercontent.com/BlairRenaissance/ImageHost/main/20240201164011.png"></p>
-<ol>
-<li>文章：md文章文件放置在source的_posts文件夹下即可。</li>
-<li>样式：Hexo有许多好看的样式工程，将其克隆到themes文件夹下，并在主样式配置文件_config.yml中指定样式工程即可生效。</li>
-<li>发布：运行 <code>hexo g</code> 后会自动生成public目录，该文件夹动态生成，因此已加入.gitignore套餐。</li>
-</ol>
-<h2 id="Hexo样式文件"><a href="#Hexo样式文件" class="headerlink" title="Hexo样式文件"></a>Hexo样式文件</h2><ol>
-<li><p>博客页面个人信息配置：修改主样式配置文件 <code>blog/_config.yml</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Renaissance</span><br><span class="line">subtitle: &#x27;谁的身影 尽逐重楼&#x27;</span><br><span class="line">author: Blair Ren</span><br><span class="line">language: en</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>博客工程文件结构配置，如根据md文件中Tag和Category信息自动生成的文件夹该叫什么。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Directory</span><br><span class="line">source_dir: source</span><br><span class="line">public_dir: public</span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>指定博客使用的样式工程。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">theme: flexblock</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>指定博客要推送的域名地址。 ^8d95ef</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:BlairRenaissance/BlairRenaissance.github.io.git</span><br><span class="line">  branch: main </span><br></pre></td></tr></table></figure>
-</li>
-<li><p>导航栏显示的名字与文件索引地址，在样式工程下的配置文件中配置（如 <code>blog/themes/flexblock/_config.yml</code>），索引地址以 <code>blog/public</code> 文件为根目录。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Header</span><br><span class="line">menu:</span><br><span class="line">  Home: /</span><br><span class="line">  Archives: /archives/</span><br><span class="line">  Categories: /categories/</span><br><span class="line">  Tags: /tags/</span><br><span class="line">  About: /about</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更多的就自由探索叭～</p>
-</li>
-</ol>
-<h1 id="PicGo图床"><a href="#PicGo图床" class="headerlink" title="PicGo图床"></a>PicGo图床</h1><p><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/zh/guide/">PicGo工程手册</a> 轻松上手，太好用了！</p>
-<p>按照 <a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/zh/guide/config.html#github%E5%9B%BE%E5%BA%8A">Github图床</a> 教学说明操作，即可通过PicGo软件管理Github工程中的文件，把一个Github工程当作图床。</p>
-<h1 id="Github-Pages域名"><a href="#Github-Pages域名" class="headerlink" title="Github Pages域名"></a>Github Pages域名</h1><p><code>github.io</code>是完全基于github创建的，其本质上是在你的github账户下创建一个特殊的repo。可以参照如下步骤创建repo：</p>
-<ol>
-<li><p>首先有个github的账户，登陆账户后，你可以<a target="_blank" rel="noopener" href="https://github.com/new">创建一个新的repo</a>。<strong>请务必注意该repo的名字，必须保持格式<code>&lt;username&gt;.github.io</code>，其中<code>&lt;username&gt;</code>替换成你的Github账户名</strong>，这里假定创建的repo为<code>BlairRenaissance.github.io</code> 。</p>
-<p> <img src="https://raw.githubusercontent.com/BlairRenaissance/ImageHost/main/20240201171859.png" alt="550"></p>
-</li>
-<li><p>将工程地址配置到Hexo工程中（参照[[#^8d95ef|指定域名]]），就可以愉快地用 <code>xxx.github.io</code> 这一域名查看自己的博客啦。</p>
-</li>
-<li><p>如果觉得这个域名不够酷，可以去腾讯云买个域名进行<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2142661">GitHub Pages个性化域名配置</a>。</p>
-</li>
-</ol>
+<p>完成安装后，还需要配置一下 Qt5 的 bin 目录到 PATH 中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;/usr/local/opt/qt@5/bin:$PATH&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="编译-RenderDoc"><a href="#编译-RenderDoc" class="headerlink" title="编译 RenderDoc"></a>编译 RenderDoc</h1><p>首先下载源码，可以直接去 github 下载最新的 release 版本或克隆源码：<a target="_blank" rel="noopener" href="https://github.com/baldurk/renderdoc">GitHub - RenderDoc</a>：</p>
+<p><img src="https://raw.githubusercontent.com/BlairRenaissance/ImageHost/main/58.png" alt="RenderDoc - Downloads"></p>
+<p>下载完成后解压：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf renderdoc-1.13.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>完成后进入 RenderDoc 源码目录使用 CMake 开始构建：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd renderdoc-1.13</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake ..</span><br><span class="line">cmake --build . -j 16</span><br></pre></td></tr></table></figure>
+
+<p>建议构建时开启 VPN，因为会去墙外下载他们修改过的 swig 源码并当场构建，网络不好可能会构建失败。</p>
+<p>中途可能会遇到报错信息如下图：</p>
+<p><img src="https://raw.githubusercontent.com/BlairRenaissance/ImageHost/main/20240308114226.png"></p>
+<p>根据错误信息的推荐，我们选择直接安装PCRE package后再次编译。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install PCRE</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>完成构建后可以在 <code>build/bin</code> 目录下找到构建完成的 RenderDoc App：</p>
+<p>[<img src="https://raw.githubusercontent.com/BlairRenaissance/ImageHost/main/59.png" alt="Build Result"></p>
+<p>Build Result</p>
+<p>运行即可：</p>
+<p>[<img src="https://raw.githubusercontent.com/BlairRenaissance/ImageHost/main/60.png" alt="RenderDoc"></p>
+<h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/80704313">GPU分析工具RenderDoc使用</a></p>
 
       </section>
 
       
       
         <nav class="article-nav">
+          
           
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
@@ -201,21 +198,6 @@
       
         <a href="/2024/02/01/Android/Android%20%E6%9E%B6%E6%9E%84%E7%AE%80%E8%BF%B0/" itemprop="url">
           <h2 class="card-text--title text-ellipsis">Android架构简述</h2>
-        </a>
-      
-      <div class="card-text--row">Newer</div>
-    </div>
-  </article>
-</div>
-          
-          
-            <div class="article-nav-item layout-padding">
-  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
-    
-    <div class="card-text">
-      
-        <a href="/2024/01/10/Android/Android%20%E5%9B%BE%E5%BD%A2%E6%98%BE%E7%A4%BA%E7%AE%80%E8%BF%B0/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">Android图形显示简述</h2>
         </a>
       
       <div class="card-text--row">Older</div>
