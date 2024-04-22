@@ -22,7 +22,7 @@
 
   
 
-  <title>OpenGL | Renaissance</title>
+  <title>Oh my zsh | Renaissance</title>
 
   
 
@@ -103,22 +103,29 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">OpenGL</h1>
+          <h1 class="title-wrap">Oh my zsh</h1>
           <h2 class="title-sub-wrap">
             <strong>Blair Ren</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2024-01-09T16:00:00.000Z" itemprop="datePublished">2024-01-10</time>
+            <time  class="article-date" datetime="2024-04-15T16:00:00.000Z" itemprop="datePublished">2024-04-16</time>
           </h2>
+          
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2024-04-22T03:51:59.219Z" itemprop="dateUpdated">2024-04-22</time>
+            </h2>
           
           
           <ul class="wrap-list dark">
   
-    <li><a href="/categories/OpenGL/">📒 OpenGL</a></li>
+    <li><a href="/categories/%E5%B7%A5%E5%85%B7/">📒 工具</a></li>
   
 </ul>
           <ul class="wrap-list dark">
   
-    <li><a href="/tags/OpenGL/">🏷️ OpenGL</a></li>
+    <li><a href="/tags/%E5%B7%A5%E5%85%B7/">🏷️ 工具</a></li>
+  
+    <li><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">🏷️ 计算机基础</a></li>
   
 </ul>
         </div>
@@ -142,20 +149,144 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <h1 id="Useful"><a href="#Useful" class="headerlink" title="Useful"></a>Useful</h1><p>超好用的OpenGL Doc： <a target="_blank" rel="noopener" href="https://docs.gl/">https://docs.gl/</a></p>
-<h1 id="Vertex-Buffer-and-Drawing-a-Triangle"><a href="#Vertex-Buffer-and-Drawing-a-Triangle" class="headerlink" title="Vertex Buffer and Drawing a Triangle"></a>Vertex Buffer and Drawing a Triangle</h1><p><strong>VBO</strong> 其实就是一个Buffer，一个memory buffer，是GPU上的内存，在VRAM(Video RAM)中。所以其实就是将一些数据放进GPU’s VRAM。</p>
-<p><strong>DrawCall</strong> 指令(which is basically a draw command)，是CPU完成了一些工作后，从CPU发出DrawCall指令通知GPU。大致是解释一下数据。</p>
-<p><strong>Shader</strong> 就是运行在显卡上的程序(a shader is just a bunch of code that we can write which runs on the GPU)。</p>
-<p><strong>OpenGL</strong> 实际上是一个状态机，它已经准备好了Data和Shader，这是它状态的一部分。控制绘制是通过变更状态进行，即设置要用的Data数据和Shader。OpenGL是上下文相关的，所以在OpenGL中生成的所有东西都会被分配一个唯一的标识符(OpenGL works as a state machine, which means that everything you generate is contextual. Everything you generate in OpenGL assigns a unique identify)。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void glVertexAttribPointer( GLuint  index,  </span><br><span class="line">			    GLint   size,  </span><br><span class="line">			    GLenum  type,  </span><br><span class="line">			    GLboolean   normalized,  </span><br><span class="line">			    GLsizei     stride,  </span><br><span class="line">			    const GLvoid *  pointer);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><em><code>index</code></em> 是当前属性的索引值(Specifies the index of the generic vertex attribute to be modified)。比如顶点上分别有位置&#x2F;纹理&#x2F;法线，分别对应index 0&#x2F;1&#x2F;2。</li>
-<li><em><code>normalized</code></em> 标识是否访问数据时需要进行标准化。颜色值在Shader中使用时需要被标准化为0到1的float值，这一步标准化可以在CPU中完成，也可以偷懒让GPU帮忙做。</li>
-<li><em><code>stride</code></em> 是一个顶点所有属性的总字节长度(Specifies the byte offset between consecutive generic vertex attributes)。</li>
-<li><em><code>pointer</code></em> 是一个顶点内当前属性的字节偏移值。</li>
-</ul>
-<p>永远不要忘记的重要一步，否则将得到黑屏：To enable and disable a generic vertex attribute array, call <code>glEnableVertexAttribArray</code> and <code>glDisableVertexAttribArray</code> with <code>index</code>.</p>
+        <blockquote>
+<p>关键词：shell &#x2F; bash </p>
+</blockquote>
+<h2 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h2><p>命令行界面（英语：command-line interface，缩写：CLI）是<strong>在图形用户界面得到普及之前使用最为广泛的用户界面</strong>，它通常不支持鼠标，用户通过键盘输入指令，计算机接收到指令后，予以执行。 也有人称之为字符用户界面（CUI）。</p>
+<p>用户在CLI中输入命令，Shell负责解释和执行这些命令，并将结果返回给用户。CLI和Shell的结合使得用户可以通过命令行来操作计算机系统。</p>
+<h2 id="What-is-the-shell"><a href="#What-is-the-shell" class="headerlink" title="What is the shell"></a>What is the shell</h2><p>Unix &#x2F; Linux shell 是指一种命令行界面，它允许用户输入命令来执行操作。Unix shell 是 Unix 和类 Unix 操作系统（如 Linux 和 macOS）的标准用户界面。</p>
+<p>Unix shell 提供了一种交互式的方式来运行程序，它可以执行各种命令，如文件操作、进程管理、网络通信等。Unix shell 还提供了一些编程特性，如变量、控制结构（如循环和条件语句）、函数等。</p>
+<p>Unix shell 的种类有很多，最常见的有 Bourne shell（sh）、Bourne Again shell（bash）、Korn shell（ksh）、C shell（csh）、zsh 等。不同的 shell 可能在语法、功能和可用性上有所不同。</p>
+<p>例如，在 Unix 和 Linux 系统中，你可以通过在终端输入 <code>bash</code> 来启动 bash shell，然后你可以输入各种命令，如 <code>ls</code>，<code>cd</code>，<code>echo</code>，<code>sed</code> 等，来执行相应的操作。</p>
+<h2 id="Using-the-shell"><a href="#Using-the-shell" class="headerlink" title="Using the shell"></a>Using the shell</h2><h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><ol>
+<li><p><code>ls</code>：列出目录中的文件和子目录</p>
+</li>
+<li><p><code>cd</code>：改变当前工作目录。</p>
+</li>
+<li><p><code>pwd</code>：打印当前工作目录。</p>
+</li>
+<li><p><code>cp</code>：复制文件或目录。</p>
+</li>
+<li><p><code>mv</code>：移动或重命名文件或目录。</p>
+</li>
+<li><p><code>rm</code>：删除文件或目录。</p>
+</li>
+<li><p><code>cat</code>：查看文件内容。</p>
+</li>
+<li><p><code>less</code>：分页查看文件内容。</p>
+</li>
+<li><p><code>grep</code>：在文件中搜索文本。</p>
+</li>
+<li><p><code>man</code>：查看命令的帮助手册。</p>
+</li>
+<li><p><code>chmod</code>：改变文件或目录的权限。</p>
+</li>
+<li><p><code>chown</code>：改变文件或目录的所有者。</p>
+</li>
+<li><p><code>mkdir</code>：创建新目录。</p>
+</li>
+<li><p><code>rmdir</code>：删除空目录。</p>
+</li>
+<li><p><code>touch</code>：创建新文件。</p>
+</li>
+<li><p><code>echo</code>：打印文本。</p>
+</li>
+<li><p><code>history</code>：查看命令历史。</p>
+</li>
+<li><p><code>exit</code>：退出当前 shell。</p>
+</li>
+<li><p><code>sudo</code>：以超级用户权限运行命令。</p>
+</li>
+<li><p><code>ssh</code>：远程登录到另一台计算机。</p>
+</li>
+<li><p><code>scp</code>：在两台计算机之间复制文件。</p>
+</li>
+<li><p><code>tar</code>：压缩或解压文件。</p>
+</li>
+<li><p><code>find</code>：在文件系统中查找文件。</p>
+</li>
+<li><p><code>ps</code>：查看当前进程。</p>
+</li>
+<li><p><code>kill</code>：终止进程。</p>
+</li>
+<li><p><code>top</code>：查看系统资源使用情况。</p>
+</li>
+<li><p><code>df</code>：查看磁盘空间使用情况。</p>
+</li>
+<li><p><code>du</code>：查看目录空间使用情况。</p>
+</li>
+<li><p><code>ln</code>：创建链接。</p>
+</li>
+<li><p><code>wget</code>：从网络下载文件。</p>
+</li>
+<li><p><code>curl</code>：发送 HTTP 请求。</p>
+</li>
+<li><p><code>ping</code>：测试网络连接。</p>
+</li>
+<li><p><code>ifconfig</code>：查看或配置网络接口。</p>
+</li>
+<li><p><code>netstat</code>：查看网络连接和统计信息。</p>
+</li>
+<li><p><code>traceroute</code>：显示数据包到达目标所经过的路径。</p>
+</li>
+<li><p><code>sed</code> ：流编辑器，一次处理一行内容。<br><code>sed -i -e &#39;s/foo/bar/&#39; filename 将所有的 &quot;foo&quot; 替换为 &quot;bar&quot;。</code></p>
+<p><code>-i 选项是 sed 的一个选项，它允许直接修改文件。默认情况下，sed 会将处理结果输出到标准输出，而不会修改原始文件。-i 选项会直接修改原始文件。</code><br><code>-e 选项是 sed 的一个选项，它允许在命令行上指定多个编辑命令。每个编辑命令都需要使用 -e 选项来指定。</code><br><code>&#39;s/foo/bar/&#39; 是编辑命令，s 是 sed 的替换命令。</code></p>
+</li>
+<li><p><code>apropos</code>：查找与关键字相关的命令。</p>
+</li>
+<li><p><code>alias</code>：创建命令的别名。</p>
+</li>
+<li><p><code>unalias</code>：删除命令的别名。</p>
+</li>
+<li><p><code>clear</code>：清除终端屏幕。</p>
+</li>
+</ol>
+<p>这些指令在 Unix&#x2F;Linux 系统中非常常用，可以帮助用户完成各种任务。</p>
+<h3 id="常用符号"><a href="#常用符号" class="headerlink" title="常用符号"></a>常用符号</h3><p>在命令行中，有许多特殊的符号和字符，它们有特定的含义。以下是一些常用的符号：</p>
+<ol>
+<li><p><code>|</code>  管道符号<br> 将左边的命令的输出作为右边命令的输入。<br> <code>ls | grep &quot;.txt&quot;</code> 会列出当前目录下的所有文本文件。</p>
+</li>
+<li><p><code>&gt;</code>  重定向符号<br> 将命令的输出写入到文件中。<br> <code>echo &quot;Hello, World&quot; &gt; hello.txt</code> 会将 “Hello, World” 写入到 hello.txt 文件中。</p>
+</li>
+<li><p><code>&gt;&gt;</code>  追加重定向符号<br> 将命令的输出追加到文件中。<br> <code>echo &quot;Hello, World&quot; &gt;&gt; hello.txt</code> 会将 “Hello, World” 追加到 hello.txt 文件中。</p>
+</li>
+<li><p><code>&lt;</code>  输入重定向符号<br> 将文件的内容作为命令的输入。<br> <code>wc -l &lt; hello.txt</code> 会统计 hello.txt 文件中的行数。</p>
+</li>
+<li><p><code>;</code>  分号<br> 允许在同一行中运行多个命令。<br> <code>echo &quot;Hello, World&quot;; ls</code> 会先打印 “Hello, World”，然后列出当前目录下的所有文件。</p>
+</li>
+<li><p><code>&amp;</code>  后台运行符号<br> 允许在后台运行命令。<br> <code>sleep 10 &amp;</code> 会让 sleep 命令在后台运行，不会阻塞终端。</p>
+</li>
+<li><p><code>&amp;&amp;</code>  逻辑与符号<br> 只有在前面的命令成功执行后，才会执行后面的命令。<br> <code>ls &amp;&amp; echo &quot;Success&quot;</code> 会先列出当前目录下的所有文件，然后打印 “Success”。</p>
+</li>
+<li><p><code>||</code>  逻辑或符号<br> 只有在前面的命令失败后，才会执行后面的命令。<br> <code>ls || echo &quot;Failed&quot;</code> 会先尝试列出当前目录下的所有文件，如果失败（例如，当前目录不存在），则打印 “Failed”。</p>
+</li>
+<li><p><code>*</code>  通配符<br> 匹配任意0个或多个字符。<br> <code>ls *.txt</code> 会列出当前目录下所有以 .txt 结尾的文件。</p>
+</li>
+<li><p><code>?</code>  通配符<br>匹配任意单个字符。<br><code>ls ?.txt</code> 会列出当前目录下所有以任意单个字符开头，以 .txt 结尾的文件。</p>
+</li>
+<li><p><code>[]</code>  字符集<br>匹配括号内的任意单个字符。<br><code>ls [abc].txt</code> 会列出当前目录下所有以 a、b 或 c 开头，以 .txt 结尾的文件。</p>
+</li>
+<li><p><code>&#123;&#125;</code>  大括号<br>用于批量处理。<br><code>touch file&#123;1..10&#125;.txt</code> 会创建 10 个名为 file1.txt 到 file10.txt 的文件。</p>
+</li>
+<li><p><code>#</code>  注释符号<br>用于在命令行中添加注释。<br><code># This is a comment</code> 是一个注释。</p>
+</li>
+<li><p><code>$</code>  变量符号<br>用于引用变量的值。<br><code>echo $HOME</code> 会打印当前用户的主目录。</p>
+</li>
+<li><p><code>()</code>  子shell<br>用于创建一个新的 shell 来执行命令。<br><code>(cd /tmp; ls)</code> 会先切换到 &#x2F;tmp 目录，然后列出该目录下的所有文件。</p>
+</li>
+<li><p><code>&#39;&#39;</code>  单引号<br>用于禁止变量替换。<br><code>echo &#39;$HOME&#39;</code> 会打印 <code>$HOME</code>，而不是主目录的路径。</p>
+</li>
+<li><p><code>&quot;&quot;</code>  双引号<br>用于允许变量替换。<br><code>echo &quot;$HOME&quot;</code> 会打印主目录的路径。</p>
+</li>
+<li><p><code>\</code>  转义符号<br>用于转义特殊字符。<br><code>echo &quot;Hello\nWorld&quot;</code> 会打印 “Hello” 和 “World” 在两行。</p>
+</li>
+<li><p><code>~</code>  主目录符号<br>表示当前用户的主目录。<br><code>cd ~</code> 会切换到当前用户的主目录。</p>
+</li>
+<li><p><code>.</code>  当前目录符号<br>表示当前目录。<br><code>cd .</code> 会保持在当前目录。</p>
+</li>
+<li><p><code>..</code>  父目录符号<br>表示当前目录的父目录。<br><code>cd ..</code> 会切换到当前目录的父目录。</p>
+</li>
+</ol>
 
       </section>
 
@@ -163,28 +294,14 @@
       
         <nav class="article-nav">
           
-            <div class="article-nav-item layout-padding">
-  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
-    
-    <div class="card-text">
-      
-        <a href="/2024/02/01/%E5%B7%A5%E5%85%B7/%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">创建自己的博客网站</h2>
-        </a>
-      
-      <div class="card-text--row">Newer</div>
-    </div>
-  </article>
-</div>
-          
           
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
     <div class="card-text">
       
-        <a href="/2024/01/10/Android/Android%20%E5%9B%BE%E5%BD%A2%E6%98%BE%E7%A4%BA%E7%AE%80%E8%BF%B0/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">Android图形显示简述</h2>
+        <a href="/2024/04/08/%E5%B7%A5%E5%85%B7/CMake%20%E4%BA%94%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">CMake 五分钟上手</h2>
         </a>
       
       <div class="card-text--row">Older</div>
