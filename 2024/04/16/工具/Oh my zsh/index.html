@@ -112,7 +112,7 @@
           
             <h2 class="last-time">
               <span>最后更新于</span>
-              <time  class="article-updated" datetime="2024-04-22T03:51:59.219Z" itemprop="dateUpdated">2024-04-22</time>
+              <time  class="article-updated" datetime="2024-04-22T03:59:18.363Z" itemprop="dateUpdated">2024-04-22</time>
             </h2>
           
           
@@ -229,8 +229,7 @@
 </li>
 <li><p><code>traceroute</code>：显示数据包到达目标所经过的路径。</p>
 </li>
-<li><p><code>sed</code> ：流编辑器，一次处理一行内容。<br><code>sed -i -e &#39;s/foo/bar/&#39; filename 将所有的 &quot;foo&quot; 替换为 &quot;bar&quot;。</code></p>
-<p><code>-i 选项是 sed 的一个选项，它允许直接修改文件。默认情况下，sed 会将处理结果输出到标准输出，而不会修改原始文件。-i 选项会直接修改原始文件。</code><br><code>-e 选项是 sed 的一个选项，它允许在命令行上指定多个编辑命令。每个编辑命令都需要使用 -e 选项来指定。</code><br><code>&#39;s/foo/bar/&#39; 是编辑命令，s 是 sed 的替换命令。</code></p>
+<li><p><code>sed</code> ：流编辑器，一次处理一行内容。</p>
 </li>
 <li><p><code>apropos</code>：查找与关键字相关的命令。</p>
 </li>
@@ -287,6 +286,13 @@
 <li><p><code>..</code>  父目录符号<br>表示当前目录的父目录。<br><code>cd ..</code> 会切换到当前目录的父目录。</p>
 </li>
 </ol>
+<h3 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h3><p><strong>sed</strong></p>
+<p><code>sed -i -e &#39;s/foo/bar/&#39; filename</code> 将所有的 “foo” 替换为 “bar”。</p>
+<ul>
+<li><code>-i</code> 选项是 sed 的一个选项，它允许直接修改文件。默认情况下，sed 会将处理结果输出到标准输出，而不会修改原始文件。-i 选项会直接修改原始文件。</li>
+<li><code>-e</code> 选项是 sed 的一个选项，它允许在命令行上指定多个编辑命令。每个编辑命令都需要使用 -e 选项来指定。&#96;</li>
+<li><code>&#39;s/foo/bar/&#39;</code> 是编辑命令，s 是 sed 的替换命令。</li>
+</ul>
 
       </section>
 
